@@ -2,15 +2,15 @@
 
 🛡️ **AIM MCP Server :: Guard and Protect your MCPs & AI Chatting**
 
-A Model Context Protocol (MCP) server that provides security tools for content analysis, threat detection, and content filtering.
+A Model Context Protocol (MCP) server that provides AI-powered content analysis and security tools. This server includes a simple hello world tool for testing and a powerful text guard tool for analyzing content safety using AIM Intelligence API.
 
 ## Features
 
-- 🔍 **Security Guard Check**: Analyze content for potential security threats
-- 🚨 **Threat Analysis**: Detect malware, phishing, spam, and social engineering attempts
-- 🔒 **Content Filter**: Sanitize content based on configurable security policies
+- 🌍 **Hello World Tool**: Simple greeting and demonstration tool for testing MCP functionality
+- 🛡️ **Text Guard Analysis**: Analyze text content for harmful or inappropriate content using AI
 - ⚡ **Fast & Lightweight**: Built with TypeScript and Zod validation
 - 🔧 **Easy Integration**: Works with any MCP-compatible AI assistant
+- 🔗 **API Integration**: Connects to AIM Intelligence API for advanced content analysis
 
 ## Installation
 
@@ -43,6 +43,7 @@ Add to your MCP client configuration:
 {
   "servers": {
     "aim-guard": {
+      "type": "stdio",
       "command": "npx",
       "args": ["aim-guard-mcp"]
     }
@@ -50,49 +51,69 @@ Add to your MCP client configuration:
 }
 ```
 
+### Testing the Tools
+
+#### Test Hello World Tool
+
+```bash
+# This will return a personalized greeting with timestamp
+{
+  "name": "aim-hello-world",
+  "arguments": {
+    "name": "Alice"
+  }
+}
+```
+
+#### Test Text Guard
+
+```bash
+# This will analyze the text for harmful content
+{
+  "name": "aim-text-guard",
+  "arguments": {
+    "text": "This is a sample text to analyze for safety."
+  }
+}
+```
+
 ### Available Tools
 
-#### 1. `guard_check`
+#### 1. `aim-hello-world`
 
-Perform security analysis on content to detect potential threats.
+A simple hello world tool for testing MCP functionality and demonstrating basic features.
 
 ```json
 {
-  "name": "guard_check",
+  "name": "aim-hello-world",
   "arguments": {
-    "content": "Your content to analyze",
-    "level": "basic" // or "advanced"
+    "name": "Your Name" // Optional: user name for personalized greeting
   }
 }
 ```
 
-#### 2. `threat_analysis`
+**Response**: Returns a greeting message with current timestamp and basic functionality demonstration.
 
-Analyze text for various types of security threats.
+#### 2. `aim-text-guard`
+
+Analyze text content for harmful or inappropriate content using AIM Intelligence API.
 
 ```json
 {
-  "name": "threat_analysis",
+  "name": "aim-text-guard",
   "arguments": {
-    "text": "Text to analyze",
-    "categories": ["malware", "phishing", "spam"]
+    "text": "Text content to analyze for harmful content"
   }
 }
 ```
 
-#### 3. `content_filter`
+**Features**:
 
-Filter and sanitize content based on security policies.
-
-```json
-{
-  "name": "content_filter",
-  "arguments": {
-    "content": "Content to filter",
-    "policy": "moderate" // "strict", "moderate", or "lenient"
-  }
-}
-```
+- Real-time content analysis
+- Harmful content detection
+- Detailed analysis results in JSON format
+- Error handling with informative messages
+- Timestamp tracking for analysis requests
 
 ## Development
 

@@ -99,7 +99,7 @@ async function main() {
   const server = createServerInstance();
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error("AIM-Intelligence MCP Server running on stdio");
+  // console.warn("AIM-Intelligence MCP Server running on stdio");
 }
 
 main().catch((error) => {
