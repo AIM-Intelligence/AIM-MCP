@@ -17,5 +17,14 @@
   "bugs": {
     "url": "https://github.com/AIM-Intelligence/AIM-MCP/issues"
   },
-  "homepage": "https://github.com/AIM-Intelligence/AIM-MCP#readme"
+  "homepage": "https://github.com/AIM-Intelligence/AIM-MCP#readme",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "zod": "^3.25.49"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.29",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  }
 }
