@@ -1,0 +1,29 @@
+# Source files
+src/
+test/
+scripts/
+
+# Config files
+tsconfig.json
+.env*
+.git*
+
+# Development files
+*.log
+node_modules/
+coverage/
+.nyc_output/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.temp

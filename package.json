@@ -2,13 +2,23 @@
   "name": "@aim-intelligence/ai-guard-mcp",
   "version": "1.0.0",
   "description": "AIM MCP Server :: Guard and Protect your MCPs & AI Chatting",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "bin": {
+    "aim-guard-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE",
+    "package.json"
+  ],
   "scripts": {
     "build": "tsc",
     "dev": "tsx src/index.ts",
     "start": "node dist/index.js",
     "test": "jest",
-    "prepublishOnly": "pnpm run build"
+    "prepublishOnly": "pnpm run build",
+    "publish:npm": "npm publish --access public"
   },
   "repository": {
     "type": "git",
