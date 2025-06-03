@@ -1,5 +1,5 @@
 {
-  "name": "@aim-intelligence/ai-guard-mcp",
+  "name": "aim-guard-mcp",
   "version": "1.0.0",
   "description": "AIM MCP Server :: Guard and Protect your MCPs & AI Chatting",
   "main": "dist/index.js",

@@ -15,7 +15,7 @@ function createServerInstance() {
 
   // Register simple hello world tool
   server.tool(
-    "hello-world",
+    "aim-hello-world",
     `AIM-Intelligence MCP`,
     {
       name: z.string().describe("user name"),
@@ -40,7 +40,7 @@ Thank you for using this tool!`,
   );
 
   server.tool(
-    "text-guard",
+    "aim-text-guard",
     `AIM-Intelligence Text Guard Tool`,
     {
       text: z.string().describe("Text to analyze for harmful content"),

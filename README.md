@@ -17,20 +17,20 @@ A Model Context Protocol (MCP) server that provides security tools for content a
 ### NPX (Recommended)
 
 ```bash
-npx @aim-intelligence/ai-guard-mcp
+npx aim-guard-mcp
 ```
 
 ### Global Installation
 
 ```bash
-npm install -g @aim-intelligence/ai-guard-mcp
+npm install -g aim-guard-mcp
 aim-guard-mcp
 ```
 
 ### Local Installation
 
 ```bash
-npm install @aim-intelligence/ai-guard-mcp
+npm install aim-guard-mcp
 ```
 
 ## Usage
@@ -44,7 +44,7 @@ Add to your MCP client configuration:
   "servers": {
     "aim-guard": {
       "command": "npx",
-      "args": ["@aim-intelligence/ai-guard-mcp"]
+      "args": ["aim-guard-mcp"]
     }
   }
 }
