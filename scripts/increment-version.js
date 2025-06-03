@@ -46,5 +46,3 @@ function incrementVersion(type = "patch") {
 // Get version type from command line arguments
 const versionType = process.argv[2] || "patch";
 incrementVersion(versionType);
-
-console.log(`Version updated: ${currentVersion} → ${newVersion}`);

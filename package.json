@@ -1,6 +1,6 @@
 {
   "name": "aim-guard-mcp",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "AIM MCP Server :: Guard and Protect your MCPs & AI Chatting",
   "main": "dist/index.js",
   "bin": {
