@@ -22,6 +22,14 @@ const ThreatAnalysisSchema = z.object({
     .default(["malware", "phishing", "spam"]),
 });
 
+const ContentFilterSchema = z.object({
+  content: z.string().describe("Content to filter"),
+  policy: z
+    .enum(["strict", "moderate", "lenient"])
+    .optional()
+    .default("moderate"),
+});
+
 async function main() {
   const server = new Server(
     {
@@ -138,8 +146,8 @@ async function main() {
         }
 
         case "content_filter": {
-          const { content, policy = "moderate" } = args;
-          const result = performContentFilter(content, policy);
+          const parsed = ContentFilterSchema.parse(args);
+          const result = performContentFilter(parsed.content, parsed.policy);
           return {
             content: [
               {
@@ -201,14 +209,14 @@ function performGuardCheck(content: string, level: string): string {
 // 위협 분석 함수
 function performThreatAnalysis(text: string, categories: string[]): string {
   const timestamp = new Date().toISOString();
-  const threats = {
+  const threats: Record<string, boolean> = {
     malware: /virus|trojan|malware|backdoor/i.test(text),
     phishing: /login|password|verify|account|suspended|click here/i.test(text),
     spam: /free|winner|prize|congratulations|urgent/i.test(text),
     social_engineering: /trust|verify|confirm|update.*info/i.test(text),
   };
 
-  const detectedCategories = categories.filter((cat) => threats[cat] || false);
+  const detectedCategories = categories.filter((cat) => threats[cat] === true);
   const overallRisk = detectedCategories.length > 0 ? "MEDIUM" : "LOW";
   const confidence = Math.floor(Math.random() * 20) + 80; // 80-99%
 
@@ -227,7 +235,7 @@ function performThreatAnalysis(text: string, categories: string[]): string {
 
 // 콘텐츠 필터 함수
 function performContentFilter(content: string, policy: string): string {
-  const policies = {
+  const policies: Record<string, string[]> = {
     strict: ["script", "iframe", "object", "embed", "form"],
     moderate: ["script", "iframe", "object"],
     lenient: ["script"],
