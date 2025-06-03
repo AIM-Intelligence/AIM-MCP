@@ -135,6 +135,54 @@ pnpm run dev
 pnpm test
 ```
 
+## Deployment
+
+This project uses automated CI/CD pipeline for seamless deployment to NPM.
+
+### Automatic Deployment
+
+When you push to the `main` branch, GitHub Actions will automatically:
+
+1. **Build and Test**: Compile TypeScript and run tests
+2. **Version Check**: Compare current version with published version
+3. **Publish to NPM**: Automatically publish if version has changed
+4. **Create Release**: Generate GitHub release with version tag
+
+### Manual Version Management
+
+```bash
+# Bump patch version (1.0.0 -> 1.0.1)
+pnpm run release:patch
+
+# Bump minor version (1.0.0 -> 1.1.0)
+pnpm run release:minor
+
+# Bump major version (1.0.0 -> 2.0.0)
+pnpm run release:major
+```
+
+### Setting up NPM Token
+
+To enable automatic deployment, add your NPM token to GitHub Secrets:
+
+1. Go to [npmjs.com](https://www.npmjs.com) and create an automation token
+2. In your GitHub repository, go to Settings > Secrets and variables > Actions
+3. Add a new secret named `NPM_TOKEN` with your NPM token value
+
+### Deployment Workflow
+
+```mermaid
+graph LR
+    A[Push to main] --> B[GitHub Actions]
+    B --> C[Build & Test]
+    C --> D[Version Check]
+    D --> E{Version Changed?}
+    E -->|Yes| F[Publish to NPM]
+    E -->|No| G[Skip Deployment]
+    F --> H[Create GitHub Release]
+    F --> I[Create Git Tag]
+```
+
 ## Contributing
 
 1. Fork the repository
