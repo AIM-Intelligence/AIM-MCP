@@ -1,13 +1,14 @@
 # AIM Guard MCP
 
-🛡️ **AIM MCP Server :: Guard and Protect your MCPs & AI Chatting**
+🛡️ **AIM MCP Server :: Guard and Protect your MCPs & AI Agents**
 
-A Model Context Protocol (MCP) server that provides AI-powered content analysis and security tools. This server includes a simple hello world tool for testing and a powerful text guard tool for analyzing content safety using AIM Intelligence API.
+A Model Context Protocol (MCP) server that provides AI-powered security analysis and safety instruction tools. This server helps protect AI agents by providing security guidelines, content analysis, and cautionary instructions when interacting with various MCPs and external services.
 
 ## Features
 
-- 🌍 **Hello World Tool**: Simple greeting and demonstration tool for testing MCP functionality
-- 🛡️ **Text Guard Analysis**: Analyze text content for harmful or inappropriate content using AI
+- 🛡️ **AI Safety Guard**: Provides contextual security instructions and precautions for AI Agents before MCP interactions
+- 🔍 **Text Guard Analysis**: Analyze text content for harmful or inappropriate content using AIM Intelligence API
+- 🔒 **Security Prompt Enhancement**: Add security instructions to user prompts for safer AI interactions
 - ⚡ **Fast & Lightweight**: Built with TypeScript and Zod validation
 - 🔧 **Easy Integration**: Works with any MCP-compatible AI assistant
 - 🔗 **API Integration**: Connects to AIM Intelligence API for advanced content analysis
@@ -53,14 +54,16 @@ Add to your MCP client configuration:
 
 ### Testing the Tools
 
-#### Test Hello World Tool
+#### Test AI Safety Guard
 
 ```bash
-# This will return a personalized greeting with timestamp
+# Get safety instructions for database operations
 {
-  "name": "aim-hello-world",
+  "name": "ai-safety-guard",
   "arguments": {
-    "name": "Alice"
+    "mcp_type": "database",
+    "operation_type": "query",
+    "sensitivity_level": "confidential"
   }
 }
 ```
@@ -77,22 +80,43 @@ Add to your MCP client configuration:
 }
 ```
 
-### Available Tools
+#### Test Security Prompt Enhancement
 
-#### 1. `aim-hello-world`
-
-A simple hello world tool for testing MCP functionality and demonstrating basic features.
-
-```json
+```bash
+# Enhance a user prompt with security instructions
 {
-  "name": "aim-hello-world",
+  "name": "aim-security-prompt-tool",
   "arguments": {
-    "name": "Your Name" // Optional: user name for personalized greeting
+    "user_prompt": "Please help me with this task",
+    "security_level": "strict"
   }
 }
 ```
 
-**Response**: Returns a greeting message with current timestamp and basic functionality demonstration.
+### Available Tools
+
+#### 1. `ai-safety-guard`
+
+Provides contextual security instructions and precautions for AI Agents before they interact with other MCPs.
+
+```json
+{
+  "name": "ai-safety-guard",
+  "arguments": {
+    "mcp_type": "email|slack|database|file|web|general", // Type of MCP being called
+    "operation_type": "read|write|execute|delete|send|query", // Operation being performed
+    "sensitivity_level": "public|internal|confidential|restricted" // Data sensitivity level
+  }
+}
+```
+
+**Features**:
+
+- Context-aware security guidelines based on MCP type
+- Operation-specific warnings and precautions
+- Sensitivity-level protocols and restrictions
+- Comprehensive checklists for safe MCP interactions
+- Red flag detection and abort recommendations
 
 #### 2. `aim-text-guard`
 
@@ -114,6 +138,48 @@ Analyze text content for harmful or inappropriate content using AIM Intelligence
 - Detailed analysis results in JSON format
 - Error handling with informative messages
 - Timestamp tracking for analysis requests
+
+#### 3. `aim-security-prompt-tool`
+
+Enhance user prompts with security instructions for safer AI interactions.
+
+```json
+{
+  "name": "aim-security-prompt-tool",
+  "arguments": {
+    "user_prompt": "Original user prompt to enhance",
+    "security_level": "basic|standard|strict" // Optional, defaults to 'standard'
+  }
+}
+```
+
+**Features**:
+
+- Multi-level security enhancement (basic, standard, strict)
+- Comprehensive threat analysis instructions
+- Social engineering protection guidelines
+- Security policy compliance checks
+- Sanitization and validation requirements
+
+## Security Features
+
+### 🛡️ AI Agent Protection
+
+- **MCP Interaction Safety**: Contextual guidelines for different MCP types
+- **Operation Validation**: Specific precautions for read/write/execute operations
+- **Data Sensitivity Handling**: Protocols based on data classification levels
+
+### 🔍 Content Analysis
+
+- **Real-time Threat Detection**: Analyze content for harmful patterns
+- **API-powered Analysis**: Advanced AI-driven content safety assessment
+- **Comprehensive Reporting**: Detailed security analysis results
+
+### 🔒 Prompt Security
+
+- **Security-Enhanced Prompts**: Add protective instructions to user prompts
+- **Configurable Security Levels**: Basic to strict security protocols
+- **Threat Prevention**: Proactive security measures in AI interactions
 
 ## Development
 
