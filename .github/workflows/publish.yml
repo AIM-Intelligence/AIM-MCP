@@ -89,7 +89,9 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create Git Tag
-        if: steps.version-check.outputs.should-publish == 'true'
+        # github token 필요로 임시 pass
+        if: false
+        # if: steps.version-check.outputs.should-publish == 'true'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
@@ -99,7 +101,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create GitHub Release
-        if: steps.version-check.outputs.should-publish == 'true'
+        # github token 필요로 임시 pass
+        if: false
+        # if: steps.version-check.outputs.should-publish == 'true'
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
