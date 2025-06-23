@@ -1,5 +1,8 @@
 # AIM Guard MCP
 
+[![NPM Version](https://img.shields.io/npm/v/aim-guard-mcp)](https://www.npmjs.com/package/aim-guard-mcp)
+[![Smithery Server](https://img.shields.io/badge/Smithery-MCP%20Server-red)](https://smithery.ai/server/@AIM-Intelligence/aim-mcp)
+
 🛡️ **AIM MCP Server :: Guard and Protect your MCPs & AI Agents**
 
 A Model Context Protocol (MCP) server that provides AI-powered security analysis and safety instruction tools. This server helps protect AI agents by providing security guidelines, content analysis, and cautionary instructions when interacting with various MCPs and external services.
