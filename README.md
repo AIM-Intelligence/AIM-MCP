@@ -4,6 +4,10 @@
 
 A Model Context Protocol (MCP) server that provides AI-powered security analysis and safety instruction tools. This server helps protect AI agents by providing security guidelines, content analysis, and cautionary instructions when interacting with various MCPs and external services.
 
+<a href="https://glama.ai/mcp/servers/@AIM-Intelligence/AIM-MCP">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@AIM-Intelligence/AIM-MCP/badge" alt="AIM-Guard-MCP MCP server" />
+</a>
+
 ## Features
 
 - 🛡️ **AI Safety Guard**: Provides contextual security instructions and precautions for AI Agents before MCP interactions
