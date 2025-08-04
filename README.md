@@ -1,4 +1,5 @@
 # AIM Guard MCP
+[![smithery badge](https://smithery.ai/badge/@AIM-Intelligence/aim-mcp)](https://smithery.ai/server/@AIM-Intelligence/aim-mcp)
 
 [![NPM Version](https://img.shields.io/npm/v/aim-guard-mcp)](https://www.npmjs.com/package/aim-guard-mcp)
 [![Smithery Server](https://img.shields.io/badge/Smithery-MCP%20Server-red)](https://smithery.ai/server/@AIM-Intelligence/aim-mcp)
@@ -21,6 +22,14 @@ A Model Context Protocol (MCP) server that provides AI-powered security analysis
 - 🔗 **API Integration**: Connects to AIM Intelligence API for advanced content analysis
 
 ## Installation
+
+### Installing via Smithery
+
+To install aim-mcp for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@AIM-Intelligence/aim-mcp):
+
+```bash
+npx -y @smithery/cli install @AIM-Intelligence/aim-mcp --client claude
+```
 
 ### NPX (Recommended)
 
