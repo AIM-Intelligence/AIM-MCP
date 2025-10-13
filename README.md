@@ -1,4 +1,6 @@
 # AIM Guard MCP
+[![Trust Score](https://archestra.ai/mcp-catalog/api/badge/quality/AIM-Intelligence/AIM-MCP)](https://archestra.ai/mcp-catalog/AIM-Intelligence__AIM-MCP)
+[![smithery badge](https://smithery.ai/badge/@AIM-Intelligence/aim-mcp)](https://smithery.ai/server/@AIM-Intelligence/aim-mcp)
 
 [![NPM Version](https://img.shields.io/npm/v/aim-guard-mcp)](https://www.npmjs.com/package/aim-guard-mcp)
 [![Smithery Server](https://img.shields.io/badge/Smithery-MCP%20Server-red)](https://smithery.ai/server/@AIM-Intelligence/aim-mcp)
@@ -6,6 +8,10 @@
 🛡️ **AIM MCP Server :: Guard and Protect your MCPs & AI Agents**
 
 A Model Context Protocol (MCP) server that provides AI-powered security analysis and safety instruction tools. This server helps protect AI agents by providing security guidelines, content analysis, and cautionary instructions when interacting with various MCPs and external services.
+
+<a href="https://glama.ai/mcp/servers/@AIM-Intelligence/AIM-MCP">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@AIM-Intelligence/AIM-MCP/badge" alt="AIM-Guard-MCP MCP server" />
+</a>
 
 ## Features
 
@@ -32,6 +38,14 @@ A Model Context Protocol (MCP) server that provides AI-powered security analysis
 - 📚 **Comprehensive Documentation**: Detailed guide for Tools, Resources, and Prompts
 
 ## Installation
+
+### Installing via Smithery
+
+To install aim-mcp for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@AIM-Intelligence/aim-mcp):
+
+```bash
+npx -y @smithery/cli install @AIM-Intelligence/aim-mcp --client claude
+```
 
 ### NPX (Recommended)
 
