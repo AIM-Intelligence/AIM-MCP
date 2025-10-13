@@ -4,6 +4,15 @@ import {
   GetPromptRequestSchema
 } from '@modelcontextprotocol/sdk/types.js';
 
+// Sanitize user input to prevent template injection
+function sanitizeInput(input: string): string {
+  return input
+    .replace(/[<>]/g, '') // Remove HTML tags
+    .replace(/\[.*?\]\(.*?\)/g, '') // Remove markdown links
+    .replace(/[`*_{}[\]()#+\-.!|]/g, '') // Remove markdown special characters
+    .substring(0, 200); // Limit length
+}
+
 export function registerPromptHandlers(server: McpServer) {
   // Handle prompts/list requests
   server.server.setRequestHandler(ListPromptsRequestSchema, async () => {
@@ -55,8 +64,9 @@ export function registerPromptHandlers(server: McpServer) {
     }
 
     if (name === 'security-review') {
-        const targetType = args?.target_type || 'code';
-        const context = args?.context || 'No additional context provided';
+        // Sanitize inputs to prevent template injection
+        const targetType = sanitizeInput(args?.target_type || 'code');
+        const context = sanitizeInput(args?.context || 'No additional context provided');
 
         return {
           messages: [
@@ -112,6 +122,25 @@ Provide an overall risk score (0-100) and recommendation:
 - 51-75: High risk - Significant remediation required
 - 76-100: Critical risk - Do not proceed until fixed
 
+### Step 8: Summary Table
+After completing all analysis steps, provide a summary table of all findings organized by severity:
+
+\`\`\`
+📊 요약
+
+| 심각도         | 개수  | 파일/위치                                    |
+|-------------|-----|------------------------------------------|
+| 🔴 CRITICAL | X   | file1.ts, file2.ts                       |
+| 🟠 HIGH     | X   | file3.ts                                 |
+| 🟡 MEDIUM   | X   | file4.ts, file5.ts                       |
+| 🟢 LOW      | X   | file6.ts                                 |
+\`\`\`
+
+The table should:
+- Count total findings by severity level (CRITICAL, HIGH, MEDIUM, LOW)
+- List the locations/files where issues were found
+- Provide a clear at-a-glance overview of all security issues
+
 ## Expected Output Format
 
 Please structure your response as:
@@ -120,6 +149,7 @@ Please structure your response as:
 3. Detailed Analysis
 4. Recommendations
 5. Risk Score and Final Verdict
+6. **Summary Table** (as shown in Step 8)
 
 **Generated**: ${new Date().toISOString()}
 **Review Type**: Security Review - ${targetType}`,
@@ -130,8 +160,9 @@ Please structure your response as:
       }
 
       if (name === 'threat-analysis') {
-        const scenario = args?.scenario || 'No scenario provided';
-        const sensitivityLevel = args?.sensitivity_level || 'internal';
+        // Sanitize inputs to prevent template injection
+        const scenario = sanitizeInput(args?.scenario || 'No scenario provided');
+        const sensitivityLevel = sanitizeInput(args?.sensitivity_level || 'internal');
 
         return {
           messages: [
@@ -217,6 +248,25 @@ Provide:
 - Risk level (Low/Medium/High/Critical)
 - Go/No-Go recommendation
 - Required security improvements
+
+### 11. Summary Table
+After completing all analysis steps, provide a summary table of all identified threats organized by severity:
+
+\`\`\`
+📊 요약
+
+| 심각도         | 개수  | 위협 유형                                    |
+|-------------|-----|------------------------------------------|
+| 🔴 CRITICAL | X   | Threat type 1, Threat type 2             |
+| 🟠 HIGH     | X   | Threat type 3                            |
+| 🟡 MEDIUM   | X   | Threat type 4, Threat type 5             |
+| 🟢 LOW      | X   | Threat type 6                            |
+\`\`\`
+
+The table should:
+- Count total threats by severity level (CRITICAL, HIGH, MEDIUM, LOW)
+- List the types of threats identified (e.g., Spoofing, Information Disclosure)
+- Provide a clear at-a-glance overview of all security threats
 
 **Generated**: ${new Date().toISOString()}
 **Analysis Type**: Threat Analysis
