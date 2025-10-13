@@ -1,0 +1,89 @@
+name: Create Release
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # 수동 트리거도 허용
+
+permissions:
+  contents: write # Required for creating tags and releases
+  pull-requests: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # 전체 히스토리를 가져와서 태그 비교 가능하게 함
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Check if version changed
+        id: version-check
+        run: |
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          # 최신 태그 확인 (없으면 0.0.0으로 설정)
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null | sed 's/^v//' || echo "0.0.0")
+          echo "current-version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+          echo "latest-tag=$LATEST_TAG" >> $GITHUB_OUTPUT
+          if [ "$CURRENT_VERSION" != "$LATEST_TAG" ]; then
+            echo "should-release=true" >> $GITHUB_OUTPUT
+            echo "Version changed from $LATEST_TAG to $CURRENT_VERSION"
+          else
+            echo "should-release=false" >> $GITHUB_OUTPUT
+            echo "Version unchanged: $CURRENT_VERSION"
+          fi
+
+      - name: Create Git Tag
+        if: steps.version-check.outputs.should-release == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git tag v${{ steps.version-check.outputs.current-version }}
+          git push origin v${{ steps.version-check.outputs.current-version }}
+
+      - name: Generate Release Notes
+        if: steps.version-check.outputs.should-release == 'true'
+        id: release-notes
+        run: |
+          # 이전 태그부터 현재까지의 커밋 로그 생성
+          PREVIOUS_TAG="v${{ steps.version-check.outputs.latest-tag }}"
+          if git rev-parse "$PREVIOUS_TAG" >/dev/null 2>&1; then
+            CHANGELOG=$(git log ${PREVIOUS_TAG}..HEAD --pretty=format:"- %s (%h)" --no-merges)
+          else
+            CHANGELOG=$(git log --pretty=format:"- %s (%h)" --no-merges)
+          fi
+
+          # EOF delimiter를 사용하여 multiline 출력 처리
+          echo "changelog<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGELOG" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        if: steps.version-check.outputs.should-release == 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.version-check.outputs.current-version }}
+          name: Release v${{ steps.version-check.outputs.current-version }}
+          body: |
+            ## What's Changed
+            ${{ steps.release-notes.outputs.changelog }}
+
+            ## Installation
+            ```bash
+            npm install aim-guard-mcp
+            ```
+
+            **NPM Package**: https://www.npmjs.com/package/aim-guard-mcp
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

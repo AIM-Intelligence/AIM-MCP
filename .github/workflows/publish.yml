@@ -8,7 +8,6 @@ on:
 
 # Add permissions for the workflow
 permissions:
-  contents: write # Required for creating tags and releases
   packages: write # Required for publishing packages
   pull-requests: read
 
@@ -87,32 +86,3 @@ jobs:
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Create Git Tag
-        # github token 필요로 임시 pass
-        if: false
-        # if: steps.version-check.outputs.should-publish == 'true'
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git tag v${{ steps.version-check.outputs.current-version }}
-          git push origin v${{ steps.version-check.outputs.current-version }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Create GitHub Release
-        # github token 필요로 임시 pass
-        if: false
-        # if: steps.version-check.outputs.should-publish == 'true'
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: v${{ steps.version-check.outputs.current-version }}
-          release_name: Release v${{ steps.version-check.outputs.current-version }}
-          body: |
-            Automated release for version ${{ steps.version-check.outputs.current-version }}
-
-            Published to NPM: https://www.npmjs.com/package/aim-guard-mcp
-          draft: false
-          prerelease: false
