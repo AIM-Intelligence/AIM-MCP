@@ -1,3 +1,6 @@
+[![en](https://img.shields.io/badge/lang-en-red.svg)](README.md)
+[![ko](https://img.shields.io/badge/lang-ko-blue.svg)](README-ko.md)
+
 # AIM Guard MCP
 [![Trust Score](https://archestra.ai/mcp-catalog/api/badge/quality/AIM-Intelligence/AIM-MCP)](https://archestra.ai/mcp-catalog/AIM-Intelligence__AIM-MCP)
 [![smithery badge](https://smithery.ai/badge/@AIM-Intelligence/aim-mcp)](https://smithery.ai/server/@AIM-Intelligence/aim-mcp)
