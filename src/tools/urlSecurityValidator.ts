@@ -1,6 +1,11 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
 
+// Escape markdown special characters to prevent injection
+function escapeMarkdown(text: string): string {
+  return text.replace(/([\\`*_{}[\]()#+\-.!|])/g, '\\$1');
+}
+
 export function registerUrlSecurityValidator(server: McpServer) {
   server.tool(
     'url-security-validator',
@@ -164,7 +169,7 @@ export function registerUrlSecurityValidator(server: McpServer) {
             type: 'text',
             text: `🌐 **URL Security Validation Report**
 
-**URL**: ${url}
+**URL**: ${escapeMarkdown(url)}
 
 **Overall Assessment**: ${assessment}
 **Risk Score**: ${riskScore}/100
