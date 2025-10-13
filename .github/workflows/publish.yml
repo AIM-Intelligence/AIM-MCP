@@ -75,7 +75,7 @@ jobs:
       - name: Auto increment version
         id: auto-version
         run: |
-          node scripts/auto-version.js
+          node scripts/increment-version.js auto
           NEW_VERSION=$(node -p "require('./package.json').version")
           echo "new-version=$NEW_VERSION" >> $GITHUB_OUTPUT
           echo "New version: $NEW_VERSION"
