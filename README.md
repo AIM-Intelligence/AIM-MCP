@@ -1,7 +1,8 @@
-🌐 [![en](https://img.shields.io/badge/lang-en-blue.svg?style=for-the-badge)](README.md)
+[![en](https://img.shields.io/badge/lang-en-blue.svg?style=for-the-badge)](README.md)
 [![ko](https://img.shields.io/badge/lang-ko-green.svg?style=for-the-badge)](README-ko.md)
 
 # AIM Guard MCP
+
 [![Trust Score](https://archestra.ai/mcp-catalog/api/badge/quality/AIM-Intelligence/AIM-MCP)](https://archestra.ai/mcp-catalog/AIM-Intelligence__AIM-MCP)
 [![smithery badge](https://smithery.ai/badge/@AIM-Intelligence/aim-mcp)](https://smithery.ai/server/@AIM-Intelligence/aim-mcp)
 
@@ -19,6 +20,7 @@ A Model Context Protocol (MCP) server that provides AI-powered security analysis
 ## Features
 
 ### 🔧 Tools (6 total)
+
 - 🛡️ **AI Safety Guard**: Contextual security instructions for MCP interactions
 - 🔍 **Text Guard Analysis**: Harmful content detection using AIM Intelligence API
 - 🔒 **Security Prompt Enhancement**: Add security layers to user prompts
@@ -27,14 +29,17 @@ A Model Context Protocol (MCP) server that provides AI-powered security analysis
 - 🌐 **URL Security Validator**: Validate URLs for phishing, malware, and HTTPS enforcement
 
 ### 📚 Resources (9 total)
+
 - 📋 **Security Checklists**: MCP-specific security checklists (database, email, slack, file, web, general)
 - 📖 **Security Policies**: Comprehensive policies (data classification, access control, incident response)
 
 ### 💬 Prompts (2 total)
+
 - 🔍 **Security Review**: Multi-step security review workflow
 - ⚠️ **Threat Analysis**: STRIDE-based threat modeling and risk assessment
 
 ### 🎯 General
+
 - ⚡ **Fast & Lightweight**: Built with TypeScript and Zod validation
 - 🔧 **Easy Integration**: Works with any MCP-compatible AI assistant
 - 🔗 **API Integration**: Connects to AIM Intelligence API for advanced analysis
@@ -193,6 +198,7 @@ Detect prompt injection attempts based on OWASP LLM01:2025 patterns.
 ```
 
 **Features**:
+
 - 15+ injection pattern detection (instruction override, role manipulation, jailbreak attempts)
 - Risk scoring (0-100) with severity assessment
 - OWASP LLM01:2025 compliant
@@ -214,6 +220,7 @@ Scan text for exposed credentials including API keys, passwords, tokens, and SSH
 ```
 
 **Features**:
+
 - 50+ credential patterns (AWS, GitHub, Google, OpenAI, Stripe, JWT, SSH keys)
 - Automatic credential masking
 - Risk level assessment
@@ -235,6 +242,7 @@ Validate URL safety for phishing, malware, and security issues.
 ```
 
 **Features**:
+
 - 10+ security checks (protocol, TLD, IP address, homograph attacks)
 - Phishing domain detection
 - URL shortener identification
@@ -257,6 +265,7 @@ Access via `security-checklist://[type]`
 - `security-checklist://general` - General MCP operations checklist
 
 **Each checklist includes**:
+
 - Pre-operation checks
 - During-operation guidelines
 - Post-operation verification
@@ -289,6 +298,7 @@ Comprehensive security review workflow for code, data, or configuration.
 ```
 
 **Workflow**:
+
 1. Credential scanning
 2. Prompt injection detection (if applicable)
 3. Security checklist consultation
@@ -298,6 +308,7 @@ Comprehensive security review workflow for code, data, or configuration.
 7. **Summary table** - Visual overview of all findings by severity
 
 **Summary Output Example**:
+
 ```
 📊 요약
 
@@ -324,6 +335,7 @@ Analyze potential security threats using STRIDE methodology.
 ```
 
 **Framework**:
+
 1. Asset identification
 2. STRIDE threat modeling (Spoofing, Tampering, Repudiation, Information Disclosure, DoS, Elevation of Privilege)
 3. Risk assessment (likelihood × impact)
@@ -335,6 +347,7 @@ Analyze potential security threats using STRIDE methodology.
 9. **Summary table** - Visual overview of all threats by severity
 
 **Summary Output Example**:
+
 ```
 📊 요약
 

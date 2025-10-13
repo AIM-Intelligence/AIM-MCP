@@ -1,7 +1,8 @@
-🌐 [![en](https://img.shields.io/badge/lang-en-blue.svg?style=for-the-badge)](README.md)
+[![en](https://img.shields.io/badge/lang-en-blue.svg?style=for-the-badge)](README.md)
 [![ko](https://img.shields.io/badge/lang-ko-green.svg?style=for-the-badge)](README-ko.md)
 
 # AIM Guard MCP
+
 [![Trust Score](https://archestra.ai/mcp-catalog/api/badge/quality/AIM-Intelligence/AIM-MCP)](https://archestra.ai/mcp-catalog/AIM-Intelligence__AIM-MCP)
 [![smithery badge](https://smithery.ai/badge/@AIM-Intelligence/aim-mcp)](https://smithery.ai/server/@AIM-Intelligence/aim-mcp)
 
@@ -19,6 +20,7 @@ AI 기반 보안 분석 및 안전 지시 도구를 제공하는 Model Context P
 ## 기능
 
 ### 🔧 도구 (총 6개)
+
 - 🛡️ **AI 안전 가드**: MCP 상호 작용을 위한 맥락적 보안 지침
 - 🔍 **텍스트 가드 분석**: AIM Intelligence API를 사용한 유해 콘텐츠 감지
 - 🔒 **보안 프롬프트 강화**: 사용자 프롬프트에 보안 레이어 추가
@@ -27,14 +29,17 @@ AI 기반 보안 분석 및 안전 지시 도구를 제공하는 Model Context P
 - 🌐 **URL 보안 검증기**: 피싱, 악성코드 및 HTTPS 적용에 대한 URL 검증
 
 ### 📚 리소스 (총 9개)
+
 - 📋 **보안 체크리스트**: MCP별 보안 체크리스트 (데이터베이스, 이메일, 슬랙, 파일, 웹, 일반)
 - 📖 **보안 정책**: 포괄적인 정책 (데이터 분류, 접근 제어, 사고 대응)
 
 ### 💬 프롬프트 (총 2개)
+
 - 🔍 **보안 검토**: 다단계 보안 검토 워크플로우
 - ⚠️ **위협 분석**: STRIDE 기반 위협 모델링 및 위험 평가
 
 ### 🎯 일반
+
 - ⚡ **빠르고 가벼움**: TypeScript와 Zod 검증으로 구축
 - 🔧 **쉬운 통합**: 모든 MCP 호환 AI 어시스턴트와 작동
 - 🔗 **API 통합**: 고급 분석을 위한 AIM Intelligence API 연결
@@ -193,6 +198,7 @@ OWASP LLM01:2025 패턴을 기반으로 프롬프트 인젝션 시도를 감지�
 ```
 
 **기능**:
+
 - 15개 이상의 인젝션 패턴 감지 (지시 덮어쓰기, 역할 조작, 탈옥 시도)
 - 심각도 평가를 통한 위험 점수 (0-100)
 - OWASP LLM01:2025 준수
@@ -214,6 +220,7 @@ API 키, 비밀번호, 토큰 및 SSH 키를 포함한 노출된 자격 증명�
 ```
 
 **기능**:
+
 - 50개 이상의 자격 증명 패턴 (AWS, GitHub, Google, OpenAI, Stripe, JWT, SSH 키)
 - 자동 자격 증명 마스킹
 - 위험 수준 평가
@@ -235,6 +242,7 @@ API 키, 비밀번호, 토큰 및 SSH 키를 포함한 노출된 자격 증명�
 ```
 
 **기능**:
+
 - 10개 이상의 보안 검사 (프로토콜, TLD, IP 주소, 호모그래프 공격)
 - 피싱 도메인 감지
 - URL 단축기 식별
@@ -257,6 +265,7 @@ API 키, 비밀번호, 토큰 및 SSH 키를 포함한 노출된 자격 증명�
 - `security-checklist://general` - 일반 MCP 작업 체크리스트
 
 **각 체크리스트 포함 내용**:
+
 - 작업 전 확인 사항
 - 작업 중 가이드라인
 - 작업 후 검증
@@ -289,6 +298,7 @@ API 키, 비밀번호, 토큰 및 SSH 키를 포함한 노출된 자격 증명�
 ```
 
 **워크플로우**:
+
 1. 자격 증명 스캔
 2. 프롬프트 인젝션 감지 (해당하는 경우)
 3. 보안 체크리스트 참조
@@ -298,6 +308,7 @@ API 키, 비밀번호, 토큰 및 SSH 키를 포함한 노출된 자격 증명�
 7. **요약 테이블** - 심각도별 모든 결과의 시각적 개요
 
 **요약 출력 예시**:
+
 ```
 📊 요약
 
@@ -324,6 +335,7 @@ STRIDE 방법론을 사용하여 잠재적 보안 위협을 분석합니다.
 ```
 
 **프레임워크**:
+
 1. 자산 식별
 2. STRIDE 위협 모델링 (스푸핑, 변조, 부인 방지, 정보 공개, DoS, 권한 상승)
 3. 위험 평가 (가능성 × 영향)
@@ -335,6 +347,7 @@ STRIDE 방법론을 사용하여 잠재적 보안 위협을 분석합니다.
 9. **요약 테이블** - 심각도별 모든 위협의 시각적 개요
 
 **요약 출력 예시**:
+
 ```
 📊 요약
 
