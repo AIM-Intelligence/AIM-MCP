@@ -9,12 +9,27 @@ A Model Context Protocol (MCP) server that provides AI-powered security analysis
 
 ## Features
 
-- 🛡️ **AI Safety Guard**: Provides contextual security instructions and precautions for AI Agents before MCP interactions
-- 🔍 **Text Guard Analysis**: Analyze text content for harmful or inappropriate content using AIM Intelligence API
-- 🔒 **Security Prompt Enhancement**: Add security instructions to user prompts for safer AI interactions
+### 🔧 Tools (6 total)
+- 🛡️ **AI Safety Guard**: Contextual security instructions for MCP interactions
+- 🔍 **Text Guard Analysis**: Harmful content detection using AIM Intelligence API
+- 🔒 **Security Prompt Enhancement**: Add security layers to user prompts
+- 🚨 **Prompt Injection Detector**: OWASP LLM01:2025 compliant injection detection
+- 🔐 **Credential Scanner**: Scan for exposed API keys, passwords, tokens, and secrets
+- 🌐 **URL Security Validator**: Validate URLs for phishing, malware, and HTTPS enforcement
+
+### 📚 Resources (9 total)
+- 📋 **Security Checklists**: MCP-specific security checklists (database, email, slack, file, web, general)
+- 📖 **Security Policies**: Comprehensive policies (data classification, access control, incident response)
+
+### 💬 Prompts (2 total)
+- 🔍 **Security Review**: Multi-step security review workflow
+- ⚠️ **Threat Analysis**: STRIDE-based threat modeling and risk assessment
+
+### 🎯 General
 - ⚡ **Fast & Lightweight**: Built with TypeScript and Zod validation
 - 🔧 **Easy Integration**: Works with any MCP-compatible AI assistant
-- 🔗 **API Integration**: Connects to AIM Intelligence API for advanced content analysis
+- 🔗 **API Integration**: Connects to AIM Intelligence API for advanced analysis
+- 📚 **Comprehensive Documentation**: Detailed guide for Tools, Resources, and Prompts
 
 ## Installation
 
@@ -106,20 +121,14 @@ Provides contextual security instructions and precautions for AI Agents before t
 {
   "name": "ai-safety-guard",
   "arguments": {
-    "mcp_type": "email|slack|database|file|web|general", // Type of MCP being called
-    "operation_type": "read|write|execute|delete|send|query", // Operation being performed
-    "sensitivity_level": "public|internal|confidential|restricted" // Data sensitivity level
+    "mcp_type": "email|slack|database|file|web|general",
+    "operation_type": "read|write|execute|delete|send|query",
+    "sensitivity_level": "public|internal|confidential|restricted"
   }
 }
 ```
 
-**Features**:
-
-- Context-aware security guidelines based on MCP type
-- Operation-specific warnings and precautions
-- Sensitivity-level protocols and restrictions
-- Comprehensive checklists for safe MCP interactions
-- Red flag detection and abort recommendations
+**Features**: Context-aware guidelines, operation-specific warnings, red flag detection
 
 #### 2. `aim-text-guard`
 
@@ -129,18 +138,12 @@ Analyze text content for harmful or inappropriate content using AIM Intelligence
 {
   "name": "aim-text-guard",
   "arguments": {
-    "text": "Text content to analyze for harmful content"
+    "text": "Text content to analyze"
   }
 }
 ```
 
-**Features**:
-
-- Real-time content analysis
-- Harmful content detection
-- Detailed analysis results in JSON format
-- Error handling with informative messages
-- Timestamp tracking for analysis requests
+**Features**: Real-time analysis, harmful content detection, detailed JSON results
 
 #### 3. `aim-security-prompt-tool`
 
@@ -150,19 +153,181 @@ Enhance user prompts with security instructions for safer AI interactions.
 {
   "name": "aim-security-prompt-tool",
   "arguments": {
-    "user_prompt": "Original user prompt to enhance",
-    "security_level": "basic|standard|strict" // Optional, defaults to 'standard'
+    "user_prompt": "Original user prompt",
+    "security_level": "basic|standard|strict"
+  }
+}
+```
+
+**Features**: Multi-level enhancement, threat analysis, social engineering protection
+
+#### 4. `prompt-injection-detector` 🆕
+
+Detect prompt injection attempts based on OWASP LLM01:2025 patterns.
+
+```json
+{
+  "name": "prompt-injection-detector",
+  "arguments": {
+    "text": "Text to analyze for injection patterns",
+    "sensitivity": "low|medium|high"
   }
 }
 ```
 
 **Features**:
+- 15+ injection pattern detection (instruction override, role manipulation, jailbreak attempts)
+- Risk scoring (0-100) with severity assessment
+- OWASP LLM01:2025 compliant
+- Configurable sensitivity levels
+- Detailed threat reporting
 
-- Multi-level security enhancement (basic, standard, strict)
-- Comprehensive threat analysis instructions
-- Social engineering protection guidelines
-- Security policy compliance checks
-- Sanitization and validation requirements
+#### 5. `credential-scanner` 🆕
+
+Scan text for exposed credentials including API keys, passwords, tokens, and SSH keys.
+
+```json
+{
+  "name": "credential-scanner",
+  "arguments": {
+    "text": "Text to scan for credentials",
+    "mask_findings": true
+  }
+}
+```
+
+**Features**:
+- 50+ credential patterns (AWS, GitHub, Google, OpenAI, Stripe, JWT, SSH keys)
+- Automatic credential masking
+- Risk level assessment
+- Platform-specific detection (AWS, GitHub, Slack, databases)
+- Actionable security recommendations
+
+#### 6. `url-security-validator` 🆕
+
+Validate URL safety for phishing, malware, and security issues.
+
+```json
+{
+  "name": "url-security-validator",
+  "arguments": {
+    "url": "URL to validate",
+    "strict_mode": false
+  }
+}
+```
+
+**Features**:
+- 10+ security checks (protocol, TLD, IP address, homograph attacks)
+- Phishing domain detection
+- URL shortener identification
+- Suspicious parameter detection
+- HTTPS enforcement validation
+
+### Available Resources 🆕
+
+Resources provide read-only security documentation and policies accessible via URI schemes.
+
+#### Security Checklists
+
+Access via `security-checklist://[type]`
+
+- `security-checklist://database` - Database operations checklist
+- `security-checklist://email` - Email operations checklist
+- `security-checklist://slack` - Chat/messaging operations checklist
+- `security-checklist://file` - File operations checklist
+- `security-checklist://web` - Web request checklist
+- `security-checklist://general` - General MCP operations checklist
+
+**Each checklist includes**:
+- Pre-operation checks
+- During-operation guidelines
+- Post-operation verification
+- Red flags to abort operations
+
+#### Security Policies
+
+Access via `security-policy://[type]`
+
+- `security-policy://data-classification` - Data classification levels and handling requirements
+- `security-policy://access-control` - Access control principles and authentication requirements
+- `security-policy://incident-response` - Incident response procedures and severity levels
+
+### Available Prompts 🆕
+
+Prompts provide reusable workflow templates for complex security operations.
+
+#### 1. `security-review`
+
+Comprehensive security review workflow for code, data, or configuration.
+
+```json
+{
+  "name": "security-review",
+  "arguments": {
+    "target_type": "code|data|configuration",
+    "context": "Additional context (optional)"
+  }
+}
+```
+
+**Workflow**:
+1. Credential scanning
+2. Prompt injection detection (if applicable)
+3. Security checklist consultation
+4. Policy compliance review
+5. Threat analysis
+6. Risk assessment and recommendations
+7. **Summary table** - Visual overview of all findings by severity
+
+**Summary Output Example**:
+```
+📊 요약
+
+| 심각도         | 개수  | 파일/위치                  |
+|-------------|-----|------------------------|
+| 🔴 CRITICAL | 1   | resources/handler.ts   |
+| 🟠 HIGH     | 2   | textGuard.ts           |
+| 🟡 MEDIUM   | 3   | prompts/handler.ts     |
+| 🟢 LOW      | 5   | credentialScanner.ts   |
+```
+
+#### 2. `threat-analysis`
+
+Analyze potential security threats using STRIDE methodology.
+
+```json
+{
+  "name": "threat-analysis",
+  "arguments": {
+    "scenario": "Security scenario to analyze",
+    "sensitivity_level": "public|internal|confidential|restricted"
+  }
+}
+```
+
+**Framework**:
+1. Asset identification
+2. STRIDE threat modeling (Spoofing, Tampering, Repudiation, Information Disclosure, DoS, Elevation of Privilege)
+3. Risk assessment (likelihood × impact)
+4. Attack vector analysis
+5. Control gap identification
+6. Mitigation strategies
+7. Compliance considerations
+8. Incident response planning
+9. **Summary table** - Visual overview of all threats by severity
+
+**Summary Output Example**:
+```
+📊 요약
+
+| 심각도         | 개수  | 위협 유형                           |
+|-------------|-----|---------------------------------|
+| 🔴 CRITICAL | 2   | Information Disclosure, Spoofing |
+| 🟠 HIGH     | 1   | Elevation of Privilege           |
+| 🟡 MEDIUM   | 3   | Tampering, DoS                   |
+| 🟢 LOW      | 1   | Repudiation                      |
+```
 
 ## Security Features
 
@@ -175,14 +340,28 @@ Enhance user prompts with security instructions for safer AI interactions.
 ### 🔍 Content Analysis
 
 - **Real-time Threat Detection**: Analyze content for harmful patterns
+- **Prompt Injection Detection**: OWASP LLM01:2025 compliant pattern matching
+- **Credential Exposure Prevention**: Scan for 50+ types of exposed secrets
 - **API-powered Analysis**: Advanced AI-driven content safety assessment
-- **Comprehensive Reporting**: Detailed security analysis results
 
-### 🔒 Prompt Security
+### 🌐 URL Security
 
-- **Security-Enhanced Prompts**: Add protective instructions to user prompts
-- **Configurable Security Levels**: Basic to strict security protocols
-- **Threat Prevention**: Proactive security measures in AI interactions
+- **Phishing Detection**: Identify suspicious domains and homograph attacks
+- **HTTPS Enforcement**: Validate secure protocol usage
+- **Malicious URL Blocking**: Check against known threat indicators
+
+### 📚 Policy & Compliance
+
+- **Security Checklists**: Pre-built checklists for all MCP types
+- **Data Classification**: Clear policies for handling sensitive data
+- **Access Control**: Guidelines for authentication and authorization
+- **Incident Response**: Structured procedures for security incidents
+
+### 🔒 Workflow Orchestration
+
+- **Security Review Prompts**: Multi-step review workflows
+- **Threat Analysis**: STRIDE-based threat modeling
+- **Automated Audits**: Combine multiple tools for comprehensive checks
 
 ## Development
 
@@ -264,11 +443,17 @@ graph LR
 
 This project is licensed under the ISC License - see the [LICENSE](LICENSE) file for details.
 
+## Documentation
+
+- 📚 **[MCP Components Guide](./MCP_COMPONENTS_GUIDE.md)**: Comprehensive guide to Tools, Resources, and Prompts
+- 📖 **[GitHub Wiki](https://github.com/AIM-Intelligence/AIM-MCP/wiki)**: Additional documentation and examples
+- 🔍 **[MCP Specification](https://modelcontextprotocol.io/)**: Official Model Context Protocol documentation
+
 ## Support
 
 - 📧 Email: support@aim-intelligence.com
 - 🐛 Issues: [GitHub Issues](https://github.com/AIM-Intelligence/AIM-MCP/issues)
-- 📖 Documentation: [GitHub Wiki](https://github.com/AIM-Intelligence/AIM-MCP/wiki)
+- 💬 Discussions: [GitHub Discussions](https://github.com/AIM-Intelligence/AIM-MCP/discussions)
 
 ---
 
