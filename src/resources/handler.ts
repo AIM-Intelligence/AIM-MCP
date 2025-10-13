@@ -88,12 +88,22 @@ export function registerResourceHandlers(server: McpServer) {
     const scheme = url.protocol.replace(':', '');
     const type = url.hostname;
 
+    // Whitelist validation to prevent path traversal
+    const allowedChecklists = ['database', 'email', 'slack', 'file', 'web', 'general'];
+    const allowedPolicies = ['data-classification', 'access-control', 'incident-response'];
+
     try {
       let content: string;
 
       if (scheme === 'security-checklist') {
+        if (!allowedChecklists.includes(type)) {
+          throw new Error(`Invalid checklist type: ${type}`);
+        }
         content = readMarkdownFile('checklists', type);
       } else if (scheme === 'security-policy') {
+        if (!allowedPolicies.includes(type)) {
+          throw new Error(`Invalid policy type: ${type}`);
+        }
         content = readMarkdownFile('policies', type);
       } else {
         throw new Error(`Unknown resource scheme: ${scheme}`);
