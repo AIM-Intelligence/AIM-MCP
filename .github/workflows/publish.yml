@@ -8,6 +8,7 @@ on:
 
 # Add permissions for the workflow
 permissions:
+  contents: write # Required for creating tags and releases
   packages: write # Required for publishing packages
   pull-requests: read
 
@@ -66,23 +67,68 @@ jobs:
       - name: Build project
         run: pnpm run build
 
-      - name: Check if version changed
-        id: version-check
+      - name: Configure Git
         run: |
-          CURRENT_VERSION=$(node -p "require('./package.json').version")
-          PUBLISHED_VERSION=$(npm view aim-guard-mcp version 2>/dev/null || echo "0.0.0")
-          echo "current-version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
-          echo "published-version=$PUBLISHED_VERSION" >> $GITHUB_OUTPUT
-          if [ "$CURRENT_VERSION" != "$PUBLISHED_VERSION" ]; then
-            echo "should-publish=true" >> $GITHUB_OUTPUT
-            echo "Version changed from $PUBLISHED_VERSION to $CURRENT_VERSION"
-          else
-            echo "should-publish=false" >> $GITHUB_OUTPUT
-            echo "Version unchanged: $CURRENT_VERSION"
-          fi
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+      - name: Auto increment version
+        id: auto-version
+        run: |
+          node scripts/auto-version.js
+          NEW_VERSION=$(node -p "require('./package.json').version")
+          echo "new-version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "New version: $NEW_VERSION"
+
+      - name: Commit version change
+        run: |
+          git add package.json
+          git commit -m "chore: bump version to ${{ steps.auto-version.outputs.new-version }} [skip ci]" || echo "No changes to commit"
+          git push || echo "Nothing to push"
 
       - name: Publish to NPM
-        if: steps.version-check.outputs.should-publish == 'true'
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create Git Tag
+        run: |
+          git tag v${{ steps.auto-version.outputs.new-version }}
+          git push origin v${{ steps.auto-version.outputs.new-version }}
+
+      - name: Generate Release Notes
+        id: release-notes
+        run: |
+          # Get commits since last tag
+          PREVIOUS_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
+          if [ -n "$PREVIOUS_TAG" ]; then
+            CHANGELOG=$(git log ${PREVIOUS_TAG}..HEAD --pretty=format:"- %s (%h)" --no-merges | grep -v "chore: bump version" || echo "- Initial release")
+          else
+            CHANGELOG=$(git log --pretty=format:"- %s (%h)" --no-merges | head -10)
+          fi
+
+          echo "changelog<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGELOG" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.auto-version.outputs.new-version }}
+          name: Release v${{ steps.auto-version.outputs.new-version }}
+          body: |
+            ## 🚀 What's Changed
+            ${{ steps.release-notes.outputs.changelog }}
+
+            ## 📦 Installation
+            ```bash
+            npm install aim-guard-mcp@${{ steps.auto-version.outputs.new-version }}
+            ```
+
+            ## 🔗 Links
+            - **NPM Package**: https://www.npmjs.com/package/aim-guard-mcp/v/${{ steps.auto-version.outputs.new-version }}
+            - **Documentation**: https://github.com/AIM-Intelligence/AIM-MCP#readme
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
