@@ -8,6 +8,7 @@
 
 [![NPM Version](https://img.shields.io/npm/v/aim-guard-mcp)](https://www.npmjs.com/package/aim-guard-mcp)
 [![Smithery Server](https://img.shields.io/badge/Smithery-MCP%20Server-red)](https://smithery.ai/server/@AIM-Intelligence/aim-mcp)
+[![MCPAmpel](https://img.shields.io/endpoint?url=https://mcpampel.com/badge/aim-intelligence/aim-mcp.json)](https://mcpampel.com/repo/aim-intelligence/aim-mcp)
 
 🛡️ **AIM MCP Server :: Guard and Protect your MCPs & AI Agents**
 
