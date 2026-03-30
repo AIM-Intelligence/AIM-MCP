@@ -45,6 +45,10 @@ A Model Context Protocol (MCP) server that provides AI-powered security analysis
 - 🔗 **API Integration**: Connects to AIM Intelligence API for advanced analysis
 - 📚 **Comprehensive Documentation**: Detailed guide for Tools, Resources, and Prompts
 
+## Hosted deployment
+
+A hosted deployment is available on [Fronteir AI](https://fronteir.ai/mcp/aim-intelligence-aim-guard-mcp).
+
 ## Installation
 
 ### Installing via Smithery
