@@ -4,7 +4,7 @@
 # AIM Guard MCP
 
 [![Trust Score](https://archestra.ai/mcp-catalog/api/badge/quality/AIM-Intelligence/AIM-MCP)](https://archestra.ai/mcp-catalog/AIM-Intelligence__AIM-MCP)
-[![smithery badge](https://smithery.ai/badge/@AIM-Intelligence/aim-mcp)](https://smithery.ai/server/@AIM-Intelligence/aim-mcp)
+[![LightNow capabilities](https://lightnow.ai/badge/io.github.aim-intelligence/aim-mcp)](https://lightnow.ai/servers/io.github.aim-intelligence/aim-mcp)
 
 [![NPM Version](https://img.shields.io/npm/v/aim-guard-mcp)](https://www.npmjs.com/package/aim-guard-mcp)
 [![Smithery Server](https://img.shields.io/badge/Smithery-MCP%20Server-red)](https://smithery.ai/server/@AIM-Intelligence/aim-mcp)
